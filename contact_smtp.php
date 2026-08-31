@@ -49,14 +49,16 @@ require __DIR__ . '/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Load SMTP config from environment
-$smtpHost = getenv('SMTP_HOST') ?: 'smtp.gmail.com';
-$smtpPort = getenv('SMTP_PORT') ?: 587;
-$smtpUser = getenv('SMTP_USER') ?: '';
-$smtpPass = getenv('SMTP_PASS') ?: '';
-$smtpSecure = getenv('SMTP_SECURE') ?: 'tls'; // 'tls' or 'ssl'
-$fromEmail = getenv('FROM_EMAIL') ?: ($smtpUser ?: 'no-reply@' . ($_SERVER['SERVER_NAME'] ?? 'localhost'));
-$toEmail = getenv('TO_EMAIL') ?: $fromEmail;
+// Configuration SMTP direct pour Gmail
+$smtpHost   = getenv('SMTP_HOST')   ?: 'smtp.gmail.com';
+$smtpPort   = getenv('SMTP_PORT')   ?: 587;
+$smtpUser   = getenv('SMTP_USER')   ?: 'kmlkhatim@gmail.com';
+$smtpPass   = getenv('SMTP_PASS')   ?: 'ngvi mzxv ppcp vipe'; // Mot de passe d'application inséré ici
+$smtpSecure = getenv('SMTP_SECURE') ?: 'tls'; // 'tls' (port 587) ou 'ssl' (port 465)
+
+// Adresses d'expédition et de réception
+$fromEmail  = getenv('FROM_EMAIL')  ?: $smtpUser;
+$toEmail    = getenv('TO_EMAIL')    ?: $smtpUser;
 
 // Fail early if SMTP credentials missing
 if (empty($smtpUser) || empty($smtpPass)){
